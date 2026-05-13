@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitForce — Personlig Træning | Personal Training</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#0d0d0d;--white:#f5f2ec;--accent:#e8521a;--accent2:#1a7ae8;
+  --gold:#c8a84b;--surface:#1a1a1a;--muted:#888;--green:#4caf50;
+  --purple:#9c27b0;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4,h5{font-family:'Bebas Neue',sans-serif;letter-spacing:0.04em}
+
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;border-bottom:1px solid #1e1e1e;position:sticky;top:0;background:rgba(13,13,13,0.98);z-index:200;gap:1rem}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--accent);letter-spacing:0.1em;white-space:nowrap}
+.logo span{color:var(--white)}
+.nav-links{display:flex;gap:1.5rem;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s;white-space:nowrap}
+.nav-links a:hover{color:var(--white)}
+.nav-right{display:flex;align-items:center;gap:0.75rem}
+.lang-toggle{display:flex;gap:4px}
+.lang-btn{background:#1a1a1a;border:1px solid #333;color:var(--muted);padding:0.3rem 0.7rem;font-size:11px;cursor:pointer;border-radius:2px;font-family:'DM Sans',sans-serif;letter-spacing:0.05em;transition:all 0.2s;white-space:nowrap}
+.lang-btn.active{background:var(--accent2);border-color:var(--accent2);color:#fff}
+.nav-cta{background:var(--accent);color:#fff;padding:0.5rem 1.2rem;border:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:opacity 0.2s;white-space:nowrap}
+.nav-cta:hover{opacity:0.85}
+.member-btn{background:transparent;color:var(--gold);padding:0.5rem 1rem;border:1px solid var(--gold);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:all 0.2s;white-space:nowrap}
+.member-btn:hover{background:var(--gold);color:#000}
+
+/* HERO */
+.hero{min-height:90vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:#0d0d0d}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(232,82,26,0.12) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(26,122,232,0.07) 0%,transparent 50%)}
+.bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(232,82,26,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(232,82,26,0.05) 1px,transparent 1px);background-size:80px 80px}
+.hero-inner{position:relative;z-index:2;padding:4rem 2rem;max-width:900px;margin:0 auto}
+.hero-badge{display:inline-block;border:1px solid rgba(232,82,26,0.5);color:var(--accent);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;padding:0.4rem 1.2rem;border-radius:2px;margin-bottom:2rem}
+.hero h1{font-size:clamp(3.5rem,10vw,8rem);line-height:0.88;margin-bottom:1.5rem}
+.hero h1 .accent{color:var(--accent)}
+.hero h1 .dim{color:var(--muted)}
+.hero-sub{font-size:clamp(1rem,2vw,1.15rem);color:var(--muted);max-width:580px;margin:0 auto 2.5rem;font-weight:300;line-height:1.7}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#fff;padding:0.9rem 2.2rem;border:none;font-family:'DM Sans',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:opacity 0.2s}
+.btn-primary:hover{opacity:0.85}
+.btn-outline{background:transparent;color:var(--white);padding:0.9rem 2.2rem;border:1px solid #444;font-family:'DM Sans',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:all 0.2s}
+.btn-outline:hover{border-color:var(--white)}
+.hero-stats{display:flex;gap:3rem;justify-content:center;margin-top:3.5rem;flex-wrap:wrap;padding-top:3rem;border-top:1px solid #1e1e1e}
+.hero-stat .num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--accent);display:block;line-height:1}
+.hero-stat .lbl{font-size:11px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase}
+
+/* SECTIONS */
+.section{padding:5rem 2.5rem;max-width:1200px;margin:0 auto}
+.section-divider{border:none;border-top:1px solid #1a1a1a;margin:0}
+.section-header{margin-bottom:3rem}
+.section-header h2{font-size:clamp(2.2rem,5vw,4rem);line-height:0.95;margin-bottom:0.75rem}
+.section-header p{color:var(--muted);max-width:560px;font-size:14px}
+
+/* STORY */
+.story-wrap{background:linear-gradient(135deg,#0f1018,#0d0d0d);border:1px solid #1e1e1e;border-radius:8px;padding:3rem;position:relative;overflow:hidden}
+.story-wrap::before{content:"";position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(232,82,26,0.07),transparent 65%);pointer-events:none}
+.story-wrap::after{content:"";position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(26,122,232,0.05),transparent 65%);pointer-events:none}
+.story-years{font-family:'Bebas Neue',sans-serif;font-size:6rem;color:rgba(232,82,26,0.12);line-height:1;position:absolute;top:1.5rem;right:2rem}
+.story-text{font-size:clamp(1rem,2vw,1.2rem);font-weight:300;color:#ddd;line-height:1.9;margin-bottom:2rem;position:relative;z-index:1}
+.story-text strong{color:var(--accent);font-weight:600;font-style:normal}
+.story-text em{color:var(--white);font-style:italic}
+.story-stats{display:flex;gap:2.5rem;flex-wrap:wrap;padding-top:2rem;border-top:1px solid #222;position:relative;z-index:1}
+.st-stat .num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--accent);display:block;line-height:1}
+.st-stat .lbl{font-size:11px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase}
+
+/* PROGRAMS */
+.prog-tabs{display:flex;gap:0.5rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.ptab{background:#141414;border:1px solid #2a2a2a;color:var(--muted);padding:0.55rem 1.3rem;border-radius:3px;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;transition:all 0.2s;font-family:'DM Sans',sans-serif}
+.ptab.active,.ptab:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.ptab-content{display:none}
+.ptab-content.active{display:block}
+
+.prog-info{padding:1rem 1.2rem;border-radius:4px;margin-bottom:1.5rem;font-size:13px;border-left:3px solid}
+.prog-info strong{font-weight:600;margin-right:0.5rem}
+
+.sessions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+.session-card{background:#111;border:1px solid #1e1e1e;border-radius:8px;overflow:hidden}
+.session-head{padding:1rem 1.25rem;border-bottom:1px solid #1e1e1e;display:flex;align-items:center;justify-content:space-between}
+.session-head h4{font-size:1.1rem;color:var(--white)}
+.session-badge{font-size:10px;padding:0.2rem 0.6rem;border-radius:2px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase}
+.session-body{padding:1.25rem}
+.session-item{padding:0.65rem 0;border-bottom:1px solid #1a1a1a;font-size:13px}
+.session-item:last-child{border-bottom:none}
+.session-item .s-label{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem}
+.session-item .s-content{color:#ddd}
+.session-item .s-detail{color:var(--muted);font-size:12px;margin-top:2px}
+
+/* EXERCISES */
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:1.25rem}
+.ex-card{background:#111;border:1px solid #1e1e1e;border-radius:8px;padding:1.25rem;text-align:center;transition:border-color 0.2s}
+.ex-card:hover{border-color:#333}
+.ex-svg-wrap{width:64px;height:64px;margin:0 auto 0.9rem;display:flex;align-items:center;justify-content:center}
+.ex-card h4{font-size:0.95rem;color:var(--white);margin-bottom:0.4rem;font-family:'Bebas Neue',sans-serif;letter-spacing:0.05em}
+.ex-card p{font-size:11.5px;color:var(--muted);line-height:1.55}
+.ex-cat{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.15rem 0.5rem;border-radius:2px;display:inline-block;margin-bottom:0.5rem}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
+.price-card{background:#111;border:1px solid #222;border-radius:8px;padding:2rem;display:flex;flex-direction:column;position:relative}
+.price-card.featured{border-color:var(--accent);background:#160e08}
+.feat-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:0.25rem 1rem;border-radius:2px;white-space:nowrap;font-weight:600}
+.price-card h3{font-size:1.5rem;color:var(--white);margin-bottom:0.4rem}
+.price-dk{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--accent);line-height:1}
+.price-us{font-size:13px;color:var(--muted);margin-bottom:0.2rem}
+.price-period{color:var(--muted);font-size:12px;margin-bottom:1.5rem;border-bottom:1px solid #1e1e1e;padding-bottom:1rem}
+.price-features{list-style:none;margin-bottom:1.5rem;flex:1}
+.price-features li{padding:0.4rem 0;font-size:13px;color:#ccc;display:flex;align-items:flex-start;gap:0.5rem;line-height:1.4}
+.price-features li::before{content:"✓";color:var(--accent);font-weight:700;flex-shrink:0;margin-top:2px}
+.money-back-note{background:#0d160a;border:1px solid #1e3a14;border-radius:4px;padding:0.6rem 0.9rem;font-size:11px;color:#6abf5e;margin-top:0.75rem}
+.price-card .btn-primary,.price-card .btn-outline{width:100%;text-align:center}
+
+/* MEMBER GATE */
+.member-gate{background:#0a0d0f;border:1px solid #1e2a35;border-radius:8px;padding:4rem 2rem;text-align:center;max-width:500px;margin:0 auto}
+.gate-icon{font-size:3rem;margin-bottom:1rem}
+.gate-title{font-size:2rem;color:var(--white);margin-bottom:0.75rem}
+.gate-text{color:var(--muted);font-size:14px;margin-bottom:2rem;line-height:1.7}
+.gate-form{display:flex;flex-direction:column;gap:0.75rem;max-width:320px;margin:0 auto}
+.gate-form input{background:#141414;border:1px solid #2a2a2a;color:var(--white);padding:0.8rem 1rem;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s}
+.gate-form input:focus{border-color:var(--accent2)}
+.gate-btn{background:var(--accent2);color:#fff;padding:0.8rem;border:none;font-family:'DM Sans',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:opacity 0.2s}
+.gate-btn:hover{opacity:0.85}
+.gate-error{color:#e84040;font-size:12px;display:none}
+.member-content{display:none}
+
+/* EAT CLEAN CONTENT */
+.eat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:2rem}
+.eat-card{background:#111;border:1px solid #1e1e1e;border-radius:8px;padding:1.5rem}
+.eat-card h4{color:var(--gold);font-size:1.1rem;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid #1e1e1e}
+.meal-row{display:grid;grid-template-columns:90px 1fr;gap:0.5rem;padding:0.55rem 0;border-bottom:1px solid #161616;font-size:13px;line-height:1.4}
+.meal-row:last-child{border-bottom:none}
+.meal-time{color:var(--muted);font-size:11px;padding-top:2px}
+.food-list{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.food-item{font-size:13px;padding:0.5rem 0.75rem;border-radius:4px;display:flex;align-items:center;gap:0.4rem}
+
+/* SIGNUP FORM */
+.form-wrap{background:#0f0f0f;border:1px solid #1e1e1e;border-radius:8px;padding:2.5rem}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group{display:flex;flex-direction:column;gap:0.4rem}
+.form-group.full{grid-column:1/-1}
+label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted)}
+input[type=text],input[type=tel],input[type=email],select,textarea{background:#161616;border:1px solid #2a2a2a;color:var(--white);padding:0.75rem 1rem;border-radius:4px;font-family:'DM Sans',sans-serif;font-size:14px;transition:border-color 0.2s;outline:none;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+select option{background:#161616}
+textarea{resize:vertical;min-height:90px}
+.radio-group{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:0.4rem}
+.radio-btn{cursor:pointer}
+.radio-btn input{display:none}
+.radio-btn span{display:inline-block;padding:0.45rem 1rem;background:#161616;border:1px solid #2a2a2a;border-radius:3px;font-size:12px;color:var(--muted);transition:all 0.2s;font-family:'DM Sans',sans-serif}
+.radio-btn input:checked+span{background:var(--accent);border-color:var(--accent);color:#fff}
+.submit-btn{background:var(--accent);color:#fff;padding:1.1rem 2.5rem;border:none;font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:4px;width:100%;margin-top:0.5rem;transition:opacity 0.2s}
+.submit-btn:hover{opacity:0.85}
+.success-msg{display:none;background:#0d160a;border:1px solid #2a5a20;border-radius:6px;padding:2rem;text-align:center;color:#6abf5e;margin-top:1rem}
+
+/* GUARANTEE BANNER */
+.guarantee{background:linear-gradient(135deg,#0a1108,#0d0d0d);border:1px solid #1e3a14;border-radius:8px;padding:2rem 2.5rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;margin-top:3rem}
+.guarantee-icon{font-size:3rem;flex-shrink:0}
+.guarantee h3{font-size:1.8rem;color:var(--green);margin-bottom:0.4rem}
+.guarantee p{color:var(--muted);font-size:14px;max-width:600px;line-height:1.7}
+
+/* FOOTER */
+footer{text-align:center;padding:3rem 2rem;border-top:1px solid #1a1a1a;color:var(--muted);font-size:13px}
+footer .f-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--accent);letter-spacing:0.1em;margin-bottom:0.75rem}
+footer .f-links{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin:1rem 0}
+footer .f-links a{color:var(--muted);text-decoration:none;font-size:12px;letter-spacing:0.06em;text-transform:uppercase}
+footer .f-links a:hover{color:var(--white)}
+
+/* MOBILE */
+@media(max-width:700px){
+  nav{padding:0.75rem 1rem;flex-wrap:wrap}
+  .nav-links{display:none}
+  .form-grid{grid-template-columns:1fr}
+  .form-group.full{grid-column:1}
+  .section{padding:3rem 1.2rem}
+  .hero-stats{gap:2rem}
+  .story-years{display:none}
+}
+
+/* UTILITY */
+.da,.en{} 
+.tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:2px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Fit<span>Force</span></div>
+  <div class="nav-links">
+    <a href="#story" class="da">Min Historie</a>
+    <a href="#story" class="en" style="display:none">My Story</a>
+    <a href="#programs" class="da">Programmer</a>
+    <a href="#programs" class="en" style="display:none">Programs</a>
+    <a href="#exercises" class="da">Øvelser</a>
+    <a href="#exercises" class="en" style="display:none">Exercises</a>
+    <a href="#pricing" class="da">Priser</a>
+    <a href="#pricing" class="en" style="display:none">Pricing</a>
+    <a href="#signup" class="da">Tilmeld</a>
+    <a href="#signup" class="en" style="display:none">Sign Up</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-da" onclick="setLang('da')">🇩🇰 DK</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">🇺🇸 EN</button>
+    </div>
+    <button class="member-btn" onclick="document.getElementById('eatclean').scrollIntoView({behavior:'smooth'})" id="member-nav-btn">
+      <span class="da">Medlems Login</span><span class="en" style="display:none">Member Login</span>
+    </button>
+    <button class="nav-cta" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">
+      <span class="da">Start Nu</span><span class="en" style="display:none">Start Now</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="bg-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="da">Danmarks mest resultatskabende personlige træningsprogram</span>
+      <span class="en" style="display:none">America's most result-driven personal training program</span>
+    </div>
+    <h1>
+      <span class="da">TRANSFORMER<br><span class="accent">DIN KROP</span><br><span class="dim">PÅ 4 UGER</span></span>
+      <span class="en" style="display:none">TRANSFORM<br><span class="accent">YOUR BODY</span><br><span class="dim">IN 4 WEEKS</span></span>
+    </h1>
+    <p class="hero-sub">
+      <span class="da">Skræddersyet personlig træning med over 20 års erfaring. 2 timers personlig coaching om ugen, individuel kostplan og løbende opfølgning — uanset dit mål. 100% pengene-tilbage garanti.</span>
+      <span class="en" style="display:none">Custom personal training backed by over 20 years of experience. 2 hours of personal coaching per week, individual nutrition plan, and ongoing follow-up — whatever your goal. 100% money-back guarantee.</span>
+    </p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})">
+        <span class="da">Tilmeld dig nu — 6.500 kr</span>
+        <span class="en" style="display:none">Sign up now — $940 USD</span>
+      </button>
+      <button class="btn-outline" onclick="document.getElementById('programs').scrollIntoView({behavior:'smooth'})">
+        <span class="da">Se programmerne</span>
+        <span class="en" style="display:none">View programs</span>
+      </button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="num">20+</span><span class="lbl da">Års erfaring</span><span class="lbl en" style="display:none">Years experience</span></div>
+      <div class="hero-stat"><span class="num">500+</span><span class="lbl da">Tilfredse kunder</span><span class="lbl en" style="display:none">Happy clients</span></div>
+      <div class="hero-stat"><span class="num">98%</span><span class="lbl da">Succesrate</span><span class="lbl en" style="display:none">Success rate</span></div>
+      <div class="hero-stat"><span class="num">100%</span><span class="lbl da">Pengene-tilbage garanti</span><span class="lbl en" style="display:none">Money-back guarantee</span></div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- STORY -->
+<div class="section" id="story">
+  <div class="section-header">
+    <h2><span class="da">MIN HISTORIE</span><span class="en" style="display:none">MY STORY</span></h2>
+    <p class="da">20+ år med personlig træning — her er hvad jeg har lært</p>
+    <p class="en" style="display:none">20+ years of personal training — here's what I've learned</p>
+  </div>
+  <div class="story-wrap">
+    <div class="story-years">20+</div>
+    <p class="story-text da">
+      Jeg ved præcis, hvad det vil sige at stå foran spejlet og ikke kunne lide det man ser. Jeg har selv været der — og jeg har hjulpet <strong>hundredvis af mennesker</strong> med at komme derfra til et sted, de aldrig troede var muligt.<br><br>
+      Med <strong>over 20 års erfaring som personlig træner</strong> har jeg set det hele. De der starter motiverede og falder fra. De der har prøvet alt og opgivet. Og dem der — med den rigtige vejledning — <em>ændrer deres liv fuldstændigt på bare 4 uger.</em><br><br>
+      Mit program er ikke et hyldevareprodukt. Det er bygget på to årtiers virkelig erfaring, videnskabelig viden og ægte resultater. <strong>Du får 2 timers personlig træning og coaching om ugen</strong>, en individuel kostplan og opfølgning der holder dig på sporet.<br><br>
+      Og er du ikke tilfreds? <strong>Du får pengene tilbage — ingen spørgsmål, ingen brok.</strong>
+    </p>
+    <p class="story-text en" style="display:none">
+      I know exactly what it feels like to stand in front of a mirror and not like what you see. I've been there myself — and I've helped <strong>hundreds of people</strong> get from that place to somewhere they never thought was possible.<br><br>
+      With <strong>over 20 years of experience as a personal trainer</strong>, I've seen it all. People who start motivated and drop out. People who've tried everything and given up. And those who — with the right guidance — <em>completely transform their lives in just 4 weeks.</em><br><br>
+      My program is not an off-the-shelf product. It's built on two decades of real-world experience, scientific knowledge, and genuine results. <strong>You get 2 hours of personal training and coaching per week</strong>, an individual nutrition plan, and follow-up that keeps you on track.<br><br>
+      Not satisfied? <strong>You get your money back — no questions, no hassle.</strong>
+    </p>
+    <div class="story-stats">
+      <div class="st-stat"><span class="num">20+</span><span class="lbl da">Års erfaring</span><span class="lbl en" style="display:none">Years exp.</span></div>
+      <div class="st-stat"><span class="num">500+</span><span class="lbl da">Kunder hjulpet</span><span class="lbl en" style="display:none">Clients helped</span></div>
+      <div class="st-stat"><span class="num">4</span><span class="lbl da">Program-typer</span><span class="lbl en" style="display:none">Program types</span></div>
+      <div class="st-stat"><span class="num">2 T</span><span class="lbl da">Personlig træning/uge</span><span class="lbl en" style="display:none">Personal coaching/week</span></div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- PROGRAMS -->
+<div class="section" id="programs">
+  <div class="section-header">
+    <h2><span class="da">4 UGERS PROGRAMMER</span><span class="en" style="display:none">4-WEEK PROGRAMS</span></h2>
+    <p class="da">Hvert program inkluderer 2 timers personlig træning om ugen + kostplan + opfølgning</p>
+    <p class="en" style="display:none">Every program includes 2 hours of personal training per week + nutrition plan + follow-up</p>
+  </div>
+
+  <div class="prog-tabs">
+    <button class="ptab active" onclick="showPTab('pt-lose',this)">🔥 <span class="da">Tab fedt</span><span class="en" style="display:none">Lose fat</span></button>
+    <button class="ptab" onclick="showPTab('pt-muscle',this)">💪 <span class="da">Byg muskler</span><span class="en" style="display:none">Build muscle</span></button>
+    <button class="ptab" onclick="showPTab('pt-maintain',this)">⚖️ <span class="da">Vedligehold</span><span class="en" style="display:none">Maintain</span></button>
+    <button class="ptab" onclick="showPTab('pt-home',this)">🏠 <span class="da">Hjemmetræning</span><span class="en" style="display:none">Home training</span></button>
+  </div>
+
+  <!-- TAB: TAB FEDT -->
+  <div class="ptab-content active" id="pt-lose">
+    <div class="prog-info" style="background:#1a0f08;border-color:var(--accent)">
+      <strong class="da" style="color:var(--accent)">Mål:</strong><strong class="en" style="color:var(--accent);display:none">Goal:</strong>
+      <span class="da">Forbrænde fedt, øge stofskiftet og forbedre kondition. 2 timer personlig træning + selvtræning hjemme.</span>
+      <span class="en" style="display:none">Burn fat, boost metabolism, and improve fitness. 2 hours personal training + home self-training sessions.</span>
+    </div>
+    <div class="sessions-grid">
+      <div class="session-card">
+        <div class="session-head">
+          <h4><span class="da">UGE 1 — Opstart</span><span class="en" style="display:none">WEEK 1 — Foundation</span></h4>
+          <span class="session-badge" style="background:rgba(232,82,26,0.15);color:var(--accent)"><span class="da">Intro</span><span class="en" style="display:none">Intro</span></span>
+        </div>
+        <div class="session-body">
+          <div class="session-item">
+            <div class="s-label da">Session 1 — Personlig træning (60 min)</div>
+            <div class="s-label en" style="display:none">Session 1 — Personal training (60 min)</div>
+            <div class="s-content da">Helkrops-kredsløb + konditionsvurdering</div>
+            <div class="s-content en" style="display:none">Full-body circuit + fitness assessment</div>
+            <div class="s-detail">Squat, Push-up, Burpee, Mountain Climber, Jump Rope — 3 runder × 12 reps</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Session 2 — Personlig træning (60 min)</div>
+            <div class="s-label en" style="display:none">Session 2 — Personal training (60 min)</div>
+            <div class="s-content da">HIIT + Core + Kondition</div>
+            <div class="s-content en" style="display:none">HIIT + Core + Cardio</div>
+            <div class="s-detail da">4 × 20 sek sprint / 40 sek hvile — Plank, Crunch, Bicycle, Leg Raise</div>
+            <div class="s-detail en" style="display:none">4 × 20 sec sprint / 40 sec rest — Plank, Crunch, Bicycle, Leg Raise</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Selvtræning (hjemme/udendørs)</div>
+            <div class="s-label en" style="display:none">Self-training (home/outdoor)</div>
+            <div class="s-content da">2–3 × 30 min cardio efter aftale</div>
+            <div class="s-content en" style="display:none">2–3 × 30 min cardio as agreed</div>
+            <div class="s-detail da">Gang, løb, cykling eller svømning</div>
+            <div class="s-detail en" style="display:none">Walking, running, cycling or swimming</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Kostplan</div>
+            <div class="s-label en" style="display:none">Nutrition plan</div>
+            <div class="s-content da">Individuel plan udleveres ved Session 1</div>
+            <div class="s-content en" style="display:none">Individual plan provided at Session 1</div>
+          </div>
+        </div>
+      </div>
+      <div class="session-card">
+        <div class="session-head">
+          <h4><span class="da">UGE 2 — Intensitet</span><span class="en" style="display:none">WEEK 2 — Intensity</span></h4>
+          <span class="session-badge" style="background:rgba(232,82,26,0.2);color:var(--accent)">↑</span>
+        </div>
+        <div class="session-body">
+          <div class="session-item">
+            <div class="s-label da">Session 3 — Personlig træning (60 min)</div>
+            <div class="s-label en" style="display:none">Session 3 — Personal training (60 min)</div>
+            <div class="s-content da">Helkrops styrke + HIIT kombineret</div>
+            <div class="s-content en" style="display:none">Full-body strength + combined HIIT</div>
+            <div class="s-detail">Bulgarian Split Squat, Dumbbell Row, Box Step, Jump Squat — kortere pauser</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Session 4 — Personlig træning (60 min)</div>
+            <div class="s-label en" style="display:none">Session 4 — Personal training (60 min)</div>
+            <div class="s-content da">Nedre krop + cardio blitz</div>
+            <div class="s-content en" style="display:none">Lower body + cardio blitz</div>
+            <div class="s-detail">Hip Thrust, Sumo Squat, Lunges + 20 min intervaller</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Opfølgning</div>
+            <div class="s-label en" style="display:none">Follow-up</div>
+            <div class="s-content da">Check-in på kostplan + justering</div>
+            <div class="s-content en" style="display:none">Nutrition plan check-in + adjustment</div>
+          </div>
+        </div>
+      </div>
+      <div class="session-card">
+        <div class="session-head">
+          <h4><span class="da">UGE 3 — Peak</span><span class="en" style="display:none">WEEK 3 — Peak</span></h4>
+          <span class="session-badge" style="background:rgba(232,82,26,0.25);color:var(--accent)">Peak</span>
+        </div>
+        <div class="session-body">
+          <div class="session-item">
+            <div class="s-label da">Session 5 — Personlig træning (60 min)</div>
+            <div class="s-label en" style="display:none">Session 5 — Personal training (60 min)</div>
+            <div class="s-content da">Metcon + full body kredsløb</div>
+            <div class="s-content en" style="display:none">Metcon + full body circuit</div>
+            <div class="s-detail">21-15-9: Thruster, Burpee, Box Jump — tidsregistrering</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Session 6 — Personlig træning (60 min)</div>
+            <div class="s-label en" style="display:none">Session 6 — Personal training (60 min)</div>
+            <div class="s-content da">Tabata HIIT + core finisher</div>
+            <div class="s-content en" style="display:none">Tabata HIIT + core finisher</div>
+            <div class="s-detail da">8 runder × 20 sek arbejde / 10 sek hvile — 6 øvelser</div>
+            <div class="s-detail en" style="display:none">8 rounds × 20 sec work / 10 sec rest — 6 exercises</div>
+          </div>
+        </div>
+      </div>
+      <div class="session-card">
+        <div class="session-head">
+          <h4><span class="da">UGE 4 — Benchmark</span><span class="en" style="display:none">WEEK 4 — Benchmark</span></h4>
+          <span class="session-badge" style="background:rgba(200,168,75,0.15);color:var(--gold)"><span class="da">Mål</span><span class="en" style="display:none">Test</span></span>
+        </div>
+        <div class="session-body">
+          <div class="session-item">
+            <div class="s-label da">Session 7 — Personlig træning (60 min)</div>
+            <div class="s-label en" style="display:none">Session 7 — Personal training (60 min)</div>
+            <div class="s-content da">Repeat uge 1 Session 1 — mål fremgang</div>
+            <div class="s-content en" style="display:none">Repeat Week 1 Session 1 — measure progress</div>
+            <div class="s-detail da">Sammenlign reps, tid og intensitet</div>
+            <div class="s-detail en" style="display:none">Compare reps, time and intensity</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Session 8 — Afslutning + plan (60 min)</div>
+            <div class="s-label en" style="display:none">Session 8 — Closing + plan (60 min)</div>
+            <div class="s-content da">Kropssammensætning + fremgangsrapport</div>
+            <div class="s-content en" style="display:none">Body composition + progress report</div>
+            <div class="s-detail da">Ny plan udleveres til næste forløb</div>
+            <div class="s-detail en" style="display:none">New plan delivered for next program</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Afsluttende kostrapport</div>
+            <div class="s-label en" style="display:none">Final nutrition report</div>
+            <div class="s-content da">Resultater + anbefalinger til videre forløb</div>
+            <div class="s-content en" style="display:none">Results + recommendations for next steps</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: MUSKLER -->
+  <div class="ptab-content" id="pt-muscle">
+    <div class="prog-info" style="background:#080f1a;border-color:var(--accent2)">
+      <strong class="da" style="color:var(--accent2)">Mål:</strong><strong class="en" style="color:var(--accent2);display:none">Goal:</strong>
+      <span class="da">Øge muskelmasse med progressive overload. 2 timer personlig styrketræning om ugen. Push/Pull/Legs princip.</span>
+      <span class="en" style="display:none">Increase muscle mass with progressive overload. 2 hours personal strength training per week. Push/Pull/Legs principle.</span>
+    </div>
+    <div class="sessions-grid">
+      <div class="session-card">
+        <div class="session-head"><h4><span class="da">UGE 1 — Fundament</span><span class="en" style="display:none">WEEK 1 — Foundation</span></h4><span class="session-badge" style="background:rgba(26,122,232,0.15);color:var(--accent2)">Push/Pull</span></div>
+        <div class="session-body">
+          <div class="session-item">
+            <div class="s-label da">Session 1 — Push (60 min)</div><div class="s-label en" style="display:none">Session 1 — Push (60 min)</div>
+            <div class="s-content da">Bryst, skulder og triceps</div><div class="s-content en" style="display:none">Chest, shoulders, triceps</div>
+            <div class="s-detail">Bænkpres 4×8, Skulderpress 3×10, Incline DB 3×10, Tricep Dips 3×12, Cable Fly 3×12</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Session 2 — Pull + Legs (60 min)</div><div class="s-label en" style="display:none">Session 2 — Pull + Legs (60 min)</div>
+            <div class="s-content da">Ryg, biceps og ben</div><div class="s-content en" style="display:none">Back, biceps, legs</div>
+            <div class="s-detail">Pulldown 4×8, Bent Row 3×10, Squat 4×8, Romanian DL 3×10, Barbell Curl 3×12</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Kostplan + protein-strategi</div><div class="s-label en" style="display:none">Nutrition + protein strategy</div>
+            <div class="s-content da">1,8–2,2g protein pr. kg kropsvægt</div><div class="s-content en" style="display:none">1.8–2.2g protein per kg bodyweight</div>
+          </div>
+        </div>
+      </div>
+      <div class="session-card">
+        <div class="session-head"><h4><span class="da">UGE 2 — Volume ↑</span><span class="en" style="display:none">WEEK 2 — Volume ↑</span></h4><span class="session-badge" style="background:rgba(26,122,232,0.2);color:var(--accent2)">+vol</span></div>
+        <div class="session-body">
+          <div class="session-item">
+            <div class="s-label da">Session 3 — Push avanceret (60 min)</div><div class="s-label en" style="display:none">Session 3 — Advanced push (60 min)</div>
+            <div class="s-content da">+5 kg på alle løft + ekstra sæt</div><div class="s-content en" style="display:none">+5 kg on all lifts + extra set</div>
+            <div class="s-detail">Decline Press, Wide Grip, Lateral Raise, Overhead Extension — 4 sæt</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Session 4 — Legs specialdag (60 min)</div><div class="s-label en" style="display:none">Session 4 — Legs focus day (60 min)</div>
+            <div class="s-content da">Ben og bagkæde — tempotræning</div><div class="s-content en" style="display:none">Legs and posterior chain — tempo work</div>
+            <div class="s-detail">Squat 3s ned, Bulgarian Split 3×10, Hip Thrust 4×12, Leg Curl 4×12</div>
+          </div>
+        </div>
+      </div>
+      <div class="session-card">
+        <div class="session-head"><h4><span class="da">UGE 3 — Intensitet</span><span class="en" style="display:none">WEEK 3 — Intensity</span></h4><span class="session-badge" style="background:rgba(26,122,232,0.25);color:var(--accent2)">Max</span></div>
+        <div class="session-body">
+          <div class="session-item">
+            <div class="s-label da">Session 5 — Drop sets (60 min)</div><div class="s-label en" style="display:none">Session 5 — Drop sets (60 min)</div>
+            <div class="s-content da">Kør til failure — Push muskelgrupper</div><div class="s-content en" style="display:none">Train to failure — push muscle groups</div>
+            <div class="s-detail da">Drop sæt på Bænkpres + Skulderpress + Tricep</div><div class="s-detail en" style="display:none">Drop sets on Bench + Shoulder Press + Tricep</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Session 6 — Tung uge (60 min)</div><div class="s-label en" style="display:none">Session 6 — Heavy week (60 min)</div>
+            <div class="s-content da">1RM-forsøg Squat + Deadlift</div><div class="s-content en" style="display:none">1RM attempt Squat + Deadlift</div>
+            <div class="s-detail da">Superset: Pullup + Bent Row × 4 runder</div><div class="s-detail en" style="display:none">Superset: Pullup + Bent Row × 4 rounds</div>
+          </div>
+        </div>
+      </div>
+      <div class="session-card">
+        <div class="session-head"><h4><span class="da">UGE 4 — Deload & Mål</span><span class="en" style="display:none">WEEK 4 — Deload & Test</span></h4><span class="session-badge" style="background:rgba(200,168,75,0.15);color:var(--gold)">Test</span></div>
+        <div class="session-body">
+          <div class="session-item">
+            <div class="s-label da">Session 7 — Deload (60 min)</div><div class="s-label en" style="display:none">Session 7 — Deload (60 min)</div>
+            <div class="s-content da">60% intensitet — fokus på teknik og kontrol</div><div class="s-content en" style="display:none">60% intensity — focus on technique and control</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Session 8 — Benchmark (60 min)</div><div class="s-label en" style="display:none">Session 8 — Benchmark (60 min)</div>
+            <div class="s-content da">Mål muskelmasse, 1RM og kropssammensætning</div><div class="s-content en" style="display:none">Measure muscle mass, 1RM and body composition</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: VEDLIGEHOLD -->
+  <div class="ptab-content" id="pt-maintain">
+    <div class="prog-info" style="background:#0a100a;border-color:var(--green)">
+      <strong class="da" style="color:var(--green)">Mål:</strong><strong class="en" style="color:var(--green);display:none">Goal:</strong>
+      <span class="da">Vedligeholde form, styrke og kondition med et bæredygtigt og varieret program. 2 timer personlig træning om ugen.</span>
+      <span class="en" style="display:none">Maintain fitness, strength and conditioning with a sustainable, varied program. 2 hours personal training per week.</span>
+    </div>
+    <div class="sessions-grid">
+      <div class="session-card">
+        <div class="session-head"><h4><span class="da">UGE 1–4 (rotation)</span><span class="en" style="display:none">WEEK 1–4 (rotation)</span></h4><span class="session-badge" style="background:rgba(76,175,80,0.15);color:var(--green)">Stabil</span></div>
+        <div class="session-body">
+          <div class="session-item">
+            <div class="s-label da">Session A — Helkrops styrke (60 min)</div><div class="s-label en" style="display:none">Session A — Full body strength (60 min)</div>
+            <div class="s-content da">Alle muskelgrupper — moderat intensitet</div><div class="s-content en" style="display:none">All muscle groups — moderate intensity</div>
+            <div class="s-detail">Squat 3×10, Press 3×10, Row 3×10, Deadlift 3×10, Core 3×</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Session B — Funktionel + Kondition (60 min)</div><div class="s-label en" style="display:none">Session B — Functional + Cardio (60 min)</div>
+            <div class="s-content da">Kettlebell, TRX, balance + 20 min cardio</div><div class="s-content en" style="display:none">Kettlebell, TRX, balance + 20 min cardio</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Selvtræning + sport</div><div class="s-label en" style="display:none">Self-training + sport</div>
+            <div class="s-content da">Tennis, fodbold, svømning, gang — 2× ugentligt</div><div class="s-content en" style="display:none">Tennis, football, swimming, walking — 2× weekly</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Opfølgning + kostjustering</div><div class="s-label en" style="display:none">Follow-up + nutrition adjustment</div>
+            <div class="s-content da">Månedlig vurdering af fremgang</div><div class="s-content en" style="display:none">Monthly progress assessment</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: HJEMMETRÆNING -->
+  <div class="ptab-content" id="pt-home">
+    <div class="prog-info" style="background:#0a0814;border-color:var(--purple)">
+      <strong class="da" style="color:var(--purple)">Mål:</strong><strong class="en" style="color:var(--purple);display:none">Goal:</strong>
+      <span class="da">Effektiv helkropstræning derhjemme. 2 timer personlig online/hjemme-coaching om ugen + selvtræningsprogram.</span>
+      <span class="en" style="display:none">Effective full-body home training. 2 hours personal online/home coaching per week + self-training program.</span>
+    </div>
+    <div class="sessions-grid">
+      <div class="session-card">
+        <div class="session-head"><h4><span class="da">UGE 1 — Basis</span><span class="en" style="display:none">WEEK 1 — Basics</span></h4><span class="session-badge" style="background:rgba(156,33,176,0.15);color:var(--purple)">Home</span></div>
+        <div class="session-body">
+          <div class="session-item">
+            <div class="s-label da">Session 1 — Overkrop + core (60 min)</div><div class="s-label en" style="display:none">Session 1 — Upper body + core (60 min)</div>
+            <div class="s-content da">Kun kropsvægt — online eller hjemmebesøg</div><div class="s-content en" style="display:none">Bodyweight only — online or home visit</div>
+            <div class="s-detail">Push-up varianter, Pike Push-up, Tricep Dip (stol), Superman, Plank, Side Plank — 3×12</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Session 2 — Underkrop + kondition (60 min)</div><div class="s-label en" style="display:none">Session 2 — Lower body + cardio (60 min)</div>
+            <div class="s-content da">Plyometrisk og funktionel træning</div><div class="s-content en" style="display:none">Plyometric and functional training</div>
+            <div class="s-detail">Squat 3×15, Lunges, Glute Bridge, Calf Raise, Jump Squat, Mountain Climber</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Selvtræning guide</div><div class="s-label en" style="display:none">Self-training guide</div>
+            <div class="s-content da">AMRAP 20 min: 5 burpee + 10 squat + 15 mountain climber</div><div class="s-content en" style="display:none">AMRAP 20 min: 5 burpee + 10 squat + 15 mountain climber</div>
+          </div>
+        </div>
+      </div>
+      <div class="session-card">
+        <div class="session-head"><h4><span class="da">UGE 2–3 — Progression</span><span class="en" style="display:none">WEEK 2–3 — Progression</span></h4><span class="session-badge" style="background:rgba(156,33,176,0.2);color:var(--purple)">↑</span></div>
+        <div class="session-body">
+          <div class="session-item">
+            <div class="s-label da">Session 3 — Avanceret overkrop (60 min)</div><div class="s-label en" style="display:none">Session 3 — Advanced upper body (60 min)</div>
+            <div class="s-content da">Decline Push-up, Wide Grip, Planche Lean, Diamond Push-up</div><div class="s-content en" style="display:none">Decline Push-up, Wide Grip, Planche Lean, Diamond Push-up</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Session 4 — Plyometri + yoga (60 min)</div><div class="s-label en" style="display:none">Session 4 — Plyometrics + yoga (60 min)</div>
+            <div class="s-content da">Jump Lunge, Box Step, Dead Bug, Bird-Dog, V-up + Sun Salutation</div><div class="s-content en" style="display:none">Jump Lunge, Box Step, Dead Bug, Bird-Dog, V-up + Sun Salutation</div>
+          </div>
+        </div>
+      </div>
+      <div class="session-card">
+        <div class="session-head"><h4><span class="da">UGE 4 — Test</span><span class="en" style="display:none">WEEK 4 — Test</span></h4><span class="session-badge" style="background:rgba(200,168,75,0.15);color:var(--gold)">Test</span></div>
+        <div class="session-body">
+          <div class="session-item">
+            <div class="s-label da">Session 7 — Benchmark (60 min)</div><div class="s-label en" style="display:none">Session 7 — Benchmark (60 min)</div>
+            <div class="s-content da">Max reps: Push-up, Squat, Plank hold — sammenlign med uge 1</div><div class="s-content en" style="display:none">Max reps: Push-up, Squat, Plank hold — compare to week 1</div>
+          </div>
+          <div class="session-item">
+            <div class="s-label da">Session 8 — Fremgang + ny plan (60 min)</div><div class="s-label en" style="display:none">Session 8 — Progress + new plan (60 min)</div>
+            <div class="s-content da">Gennemgang af resultater og anbefalinger</div><div class="s-content en" style="display:none">Review of results and recommendations</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- EXERCISES -->
+<div class="section" id="exercises">
+  <div class="section-header">
+    <h2><span class="da">ØVELSE GUIDE</span><span class="en" style="display:none">EXERCISE GUIDE</span></h2>
+    <p class="da">24 vigtige øvelser med tegning og udførelsesbeskrivelse</p>
+    <p class="en" style="display:none">24 key exercises with illustration and performance cues</p>
+  </div>
+  <div class="ex-grid">
+
+    <!-- SQUAT -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(232,82,26,0.15);color:var(--accent)"><span class="da">Ben</span><span class="en" style="display:none">Legs</span></span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="10" r="7" fill="#e8521a"/><path d="M32 19 L32 36 M22 52 L32 36 L42 52 M18 27 L32 31 L46 27" stroke="#e8521a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>Squat</h4>
+      <p class="da">Stå skulderbredt. Sænk hofterne til 90° i knæene. Ryg ret, kig frem. Pres igennem hælene.</p>
+      <p class="en" style="display:none">Stand shoulder-width. Lower hips to 90° at knees. Back straight, look forward. Drive through heels.</p>
+    </div>
+
+    <!-- PUSH-UP -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(26,122,232,0.15);color:var(--accent2)"><span class="da">Bryst</span><span class="en" style="display:none">Chest</span></span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="12" cy="22" r="6" fill="#1a7ae8"/><path d="M18 22 L52 22 M52 22 L52 38 L40 42 L12 28 L18 22" stroke="#1a7ae8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>Push-up</h4>
+      <p class="da">Strakte arme, krop i ret linje. Sænk brystet mod gulvet. Albuer 45° ud. Pres op.</p>
+      <p class="en" style="display:none">Straight arms, body in a straight line. Lower chest toward floor. Elbows at 45°. Press up.</p>
+    </div>
+
+    <!-- LUNGES -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(232,82,26,0.15);color:var(--accent)"><span class="da">Ben</span><span class="en" style="display:none">Legs</span></span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="10" r="6" fill="#c8a84b"/><path d="M32 17 L32 30 M18 30 L32 30 L46 30 M20 52 L32 30 L44 52" stroke="#c8a84b" stroke-width="2.5" stroke-linecap="round"/><circle cx="20" cy="54" r="3" fill="#c8a84b" opacity="0.4"/></svg>
+      </div>
+      <h4>Lunges</h4>
+      <p class="da">Stort skridt frem. Sænk bageste knæ mod gulvet. Begge knæ 90°. Hold overkrop opret.</p>
+      <p class="en" style="display:none">Big step forward. Lower back knee toward floor. Both knees at 90°. Keep torso upright.</p>
+    </div>
+
+    <!-- PLANK -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(76,175,80,0.15);color:var(--green)">Core</span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="10" cy="26" r="6" fill="#4caf50"/><path d="M16 26 L54 26 M16 26 L16 38 M54 26 L54 38" stroke="#4caf50" stroke-width="2.5" stroke-linecap="round"/><path d="M16 38 L54 38" stroke="#4caf50" stroke-width="1.5" stroke-dasharray="4 3"/></svg>
+      </div>
+      <h4>Planke</h4>
+      <p class="da">Krop ret som et bræt. Underarme i gulvet. Stram core og bagdel. 30–90 sek.</p>
+      <p class="en" style="display:none">Body straight as a board. Forearms on floor. Engage core and glutes. 30–90 sec.</p>
+    </div>
+
+    <!-- BURPEE -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(232,82,26,0.15);color:var(--accent)">HIIT</span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="8" r="6" fill="#e84040"/><path d="M32 14 L32 24 M20 20 L32 24 L44 20 M12 36 L32 28 L52 36 M28 52 L32 40 L36 52" stroke="#e84040" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <h4>Burpee</h4>
+      <p class="da">Spring op med arme over hoved → hop til plank → push-up → hop ind → hop op. Gentag.</p>
+      <p class="en" style="display:none">Jump up with arms overhead → jump to plank → push-up → hop in → jump up. Repeat.</p>
+    </div>
+
+    <!-- DEADLIFT -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(156,33,176,0.15);color:var(--purple)"><span class="da">Ryg</span><span class="en" style="display:none">Back</span></span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="10" r="6" fill="#9c27b0"/><path d="M32 16 L32 30 M16 24 L32 30 L48 24 M20 52 L32 34 L44 52 M12 52 L52 52" stroke="#9c27b0" stroke-width="2.5" stroke-linecap="round"/><rect x="8" y="49" width="8" height="6" rx="2" fill="#9c27b0" opacity="0.5"/><rect x="48" y="49" width="8" height="6" rx="2" fill="#9c27b0" opacity="0.5"/></svg>
+      </div>
+      <h4>Deadlift</h4>
+      <p class="da">Stang foran ben. Grib skulderbredt. Ryg neutral. Løft ved at strække hofter og knæ.</p>
+      <p class="en" style="display:none">Bar in front of legs. Shoulder-width grip. Neutral back. Lift by extending hips and knees.</p>
+    </div>
+
+    <!-- HIP THRUST -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(232,82,26,0.15);color:var(--accent)"><span class="da">Bagdel</span><span class="en" style="display:none">Glutes</span></span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="20" r="6" fill="#e8521a"/><path d="M12 28 L52 28 M12 28 L12 50 M52 28 L52 50 M12 50 L52 50 M22 28 L22 40 L42 40 L42 28" stroke="#e8521a" stroke-width="2" stroke-linecap="round"/><path d="M26 35 Q32 28 38 35" stroke="#e8521a" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg>
+      </div>
+      <h4>Hip Thrust</h4>
+      <p class="da">Ryg mod bænk. Stang over hofter. Pres hofterne op til parallelt med gulvet. Klem bagdelen.</p>
+      <p class="en" style="display:none">Back against bench. Bar over hips. Drive hips up parallel to floor. Squeeze glutes hard.</p>
+    </div>
+
+    <!-- PULL-UP -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(26,122,232,0.15);color:var(--accent2)"><span class="da">Ryg</span><span class="en" style="display:none">Back</span></span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><path d="M10 12 L54 12" stroke="#1a7ae8" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="22" r="6" fill="#1a7ae8"/><path d="M20 14 L20 28 M44 14 L44 28 M20 28 L32 28 L44 28 M24 52 L32 36 L40 52" stroke="#1a7ae8" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <h4>Pull-up</h4>
+      <p class="da">Hæng i bom, overhåndsgreb. Træk dig op til hagen er over bommen. Sænk kontrolleret.</p>
+      <p class="en" style="display:none">Hang from bar, overhand grip. Pull yourself up until chin clears bar. Lower with control.</p>
+    </div>
+
+    <!-- MOUNTAIN CLIMBER -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(232,82,26,0.15);color:var(--accent)">HIIT / Core</span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="54" cy="16" r="6" fill="#c8a84b"/><path d="M48 16 L12 32 M12 32 L20 40 M12 32 L22 24 M20 40 L30 38 M22 24 L34 24" stroke="#c8a84b" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <h4>Mountain Climber</h4>
+      <p class="da">Start i plank. Træk knæene frem mod brystet i hurtigt tempo skiftevis. Hold hofterne nede.</p>
+      <p class="en" style="display:none">Start in plank. Drive knees alternately toward chest in rapid tempo. Keep hips down.</p>
+    </div>
+
+    <!-- BENCH PRESS -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(26,122,232,0.15);color:var(--accent2)"><span class="da">Bryst</span><span class="en" style="display:none">Chest</span></span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="8" y="42" width="48" height="8" rx="3" fill="#1a7ae8" opacity="0.3"/><circle cx="32" cy="28" r="6" fill="#1a7ae8"/><path d="M12 22 L52 22 M12 22 L12 36 M52 22 L52 36 M32 22 L32 34" stroke="#1a7ae8" stroke-width="2.5" stroke-linecap="round"/><circle cx="6" cy="22" r="4" fill="#1a7ae8" opacity="0.5"/><circle cx="58" cy="22" r="4" fill="#1a7ae8" opacity="0.5"/></svg>
+      </div>
+      <h4>Bænkpres</h4>
+      <p class="da">Lig på bænk. Skulderbredt greb. Sænk stangen til brystet. Hold styr på albuerne — pres op.</p>
+      <p class="en" style="display:none">Lie on bench. Shoulder-width grip. Lower bar to chest. Control your elbows — press up.</p>
+    </div>
+
+    <!-- OVERHEAD PRESS -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(156,33,176,0.15);color:var(--purple)"><span class="da">Skulder</span><span class="en" style="display:none">Shoulder</span></span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="10" r="6" fill="#9c27b0"/><path d="M32 16 L32 26 M18 22 L32 26 L46 22 M18 22 L14 36 M46 22 L50 36 M22 52 L32 38 L42 52" stroke="#9c27b0" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <h4>Overhead Press</h4>
+      <p class="da">Stang ved skuldrene. Pres lodret op til fuld armstrækning. Stram core. Sænk kontrolleret.</p>
+      <p class="en" style="display:none">Bar at shoulders. Press vertically to full extension. Brace core. Lower with control.</p>
+    </div>
+
+    <!-- RUSSIAN TWIST -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(76,175,80,0.15);color:var(--green)">Core</span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="22" r="6" fill="#9c27b0"/><path d="M14 54 L32 28 L50 54 M14 54 L50 54 M24 38 L32 32 L40 38" stroke="#9c27b0" stroke-width="2.5" stroke-linecap="round"/><path d="M22 30 Q32 26 42 30" stroke="#9c27b0" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      </div>
+      <h4>Russian Twist</h4>
+      <p class="da">V-position med løftede ben. Hold hænder samlet. Roter overkroppen side til side med kontrol.</p>
+      <p class="en" style="display:none">V-sit with feet lifted. Hands clasped together. Rotate torso side to side with control.</p>
+    </div>
+
+    <!-- BULGARIAN SPLIT SQUAT -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(232,82,26,0.15);color:var(--accent)"><span class="da">Ben</span><span class="en" style="display:none">Legs</span></span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="28" cy="10" r="6" fill="#e8521a"/><path d="M28 16 L28 28 M16 24 L28 28 L40 24 M18 52 L28 32 L40 44 M44 44 L44 52" stroke="#e8521a" stroke-width="2.5" stroke-linecap="round"/><rect x="40" y="40" width="16" height="6" rx="2" fill="#e8521a" opacity="0.3"/></svg>
+      </div>
+      <h4>Bulgarian Split Squat</h4>
+      <p class="da">Bagbenet på bænk. Forsinkøet bøjet 90°. Sænk ned — fremste knæ over tå. Pres op.</p>
+      <p class="en" style="display:none">Rear foot on bench. Front knee bent 90°. Lower down — front knee over toe. Drive up.</p>
+    </div>
+
+    <!-- CABLE ROW -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(26,122,232,0.15);color:var(--accent2)"><span class="da">Ryg</span><span class="en" style="display:none">Back</span></span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="14" cy="32" r="6" fill="#1a7ae8"/><path d="M20 32 L52 32 M20 32 L20 20 M20 32 L20 44 M52 32 L44 24 M52 32 L44 40" stroke="#1a7ae8" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <h4>Seated Cable Row</h4>
+      <p class="da">Sid opret. Træk håndtaget ind mod maven. Klem skulderbladene. Stræk armene kontrolleret.</p>
+      <p class="en" style="display:none">Sit upright. Pull handle toward abdomen. Squeeze shoulder blades. Extend arms controlled.</p>
+    </div>
+
+    <!-- TRICEP DIP -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(156,33,176,0.15);color:var(--purple)">Tricep</span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><path d="M10 20 L54 20" stroke="#9c27b0" stroke-width="3" stroke-linecap="round"/><circle cx="32" cy="30" r="6" fill="#9c27b0"/><path d="M20 22 L20 36 M44 22 L44 36 M20 36 L24 48 M44 36 L40 48" stroke="#9c27b0" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <h4>Tricep Dips</h4>
+      <p class="da">Hænd på stole/bom bag dig. Sænk kroppen ved at bøje albuerne. Pres op til fuld strækning.</p>
+      <p class="en" style="display:none">Hands on chair/bar behind you. Lower body by bending elbows. Press up to full extension.</p>
+    </div>
+
+    <!-- LATERAL RAISE -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(156,33,176,0.15);color:var(--purple)"><span class="da">Skulder</span><span class="en" style="display:none">Shoulder</span></span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="12" r="6" fill="#9c27b0"/><path d="M32 18 L32 32 M32 32 L22 46 M32 32 L42 46 M8 28 L32 32 L56 28" stroke="#9c27b0" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <h4>Lateral Raise</h4>
+      <p class="da">Hold håndvægte ved siden. Løft armene vandret ud til siderne til skulderhøjde. Sænk langsomt.</p>
+      <p class="en" style="display:none">Hold dumbbells at sides. Raise arms horizontally out to shoulder height. Lower slowly.</p>
+    </div>
+
+    <!-- BOX JUMP -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(232,82,26,0.15);color:var(--accent)"><span class="da">Eksplosiv</span><span class="en" style="display:none">Explosive</span></span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="22" cy="8" r="6" fill="#e84040"/><path d="M22 14 L22 26 M14 22 L22 26 L30 22 M16 50 L22 30 L28 50" stroke="#e84040" stroke-width="2.5" stroke-linecap="round"/><rect x="32" y="38" width="20" height="14" rx="3" fill="#e84040" opacity="0.3" stroke="#e84040" stroke-width="1.5"/><path d="M42 28 L42 38" stroke="#e84040" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 2"/></svg>
+      </div>
+      <h4>Box Jump</h4>
+      <p class="da">Spring eksplosivt op på kasse med begge ben. Land blødt med bøjede knæ. Stå op. Hop ned.</p>
+      <p class="en" style="display:none">Explosively jump onto box with both feet. Land softly with bent knees. Stand up. Step down.</p>
+    </div>
+
+    <!-- FACE PULL -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(26,122,232,0.15);color:var(--accent2)"><span class="da">Skulder</span><span class="en" style="display:none">Shoulder</span></span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="50" cy="32" r="6" fill="#1a7ae8"/><path d="M44 32 L20 32 M44 32 L44 20 M44 32 L44 44 M20 32 L16 24 M20 32 L16 40" stroke="#1a7ae8" stroke-width="2.5" stroke-linecap="round"/><circle cx="14" cy="32" r="4" fill="#1a7ae8" opacity="0.3"/></svg>
+      </div>
+      <h4>Face Pull</h4>
+      <p class="da">Kabel i ansigthøjde. Træk mod ansigtet med albuerne højt og ud. Klem skulderbladene.</p>
+      <p class="en" style="display:none">Cable at face height. Pull toward face with elbows high and wide. Squeeze shoulder blades.</p>
+    </div>
+
+    <!-- GLUTE BRIDGE -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(232,82,26,0.15);color:var(--accent)"><span class="da">Bagdel</span><span class="en" style="display:none">Glutes</span></span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="18" cy="22" r="6" fill="#e8521a"/><path d="M8 50 L18 50 L18 28 M18 28 L36 22 L52 30 M52 30 L52 50 M8 50 L52 50" stroke="#e8521a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>Glute Bridge</h4>
+      <p class="da">Lig på ryggen, fødder fladt. Pres hofterne mod loftet. Klem bagdelen i toppen. Sænk langsomt.</p>
+      <p class="en" style="display:none">Lie on back, feet flat. Drive hips toward ceiling. Squeeze glutes at top. Lower slowly.</p>
+    </div>
+
+    <!-- BIRD DOG -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(76,175,80,0.15);color:var(--green)">Core</span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="26" r="6" fill="#4caf50"/><path d="M22 32 L42 32 M22 32 L10 44 M42 32 L54 20 M22 32 L22 50 M42 32 L42 50" stroke="#4caf50" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <h4>Bird Dog</h4>
+      <p class="da">På alle fire. Stræk højre arm og venstre ben horisontalt. Hold 3 sek. Skift side. Styr balancen.</p>
+      <p class="en" style="display:none">On all fours. Extend right arm and left leg horizontally. Hold 3 sec. Switch sides. Control balance.</p>
+    </div>
+
+    <!-- DEAD BUG -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(76,175,80,0.15);color:var(--green)">Core</span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="28" r="7" fill="#4caf50"/><path d="M32 35 L32 48 M32 48 L24 56 M32 48 L40 56 M32 35 L22 30 M32 35 L42 30 M22 30 L12 38 M42 30 L52 38" stroke="#4caf50" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <h4>Dead Bug</h4>
+      <p class="da">Lig på ryggen. Arme op, knæ 90°. Stræk modsat arm og ben mod gulvet. Hold lænden nede.</p>
+      <p class="en" style="display:none">Lie on back. Arms up, knees 90°. Extend opposite arm and leg toward floor. Keep lower back flat.</p>
+    </div>
+
+    <!-- SUMO SQUAT -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(232,82,26,0.15);color:var(--accent)"><span class="da">Ben/Bagdel</span><span class="en" style="display:none">Leg/Glutes</span></span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="8" r="6" fill="#c8a84b"/><path d="M32 14 L32 28 M32 28 L16 40 M32 28 L48 40 M16 40 L12 56 M48 40 L52 56 M16 40 L32 34 L48 40" stroke="#c8a84b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>Sumo Squat</h4>
+      <p class="da">Bredt stance med tæerne udad. Sænk hofterne dybt. Tyngde på hæle. Klem bagdelen ved toppen.</p>
+      <p class="en" style="display:none">Wide stance, toes pointed out. Lower hips deeply. Weight on heels. Squeeze glutes at top.</p>
+    </div>
+
+    <!-- INCLINE PUSH-UP -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(26,122,232,0.15);color:var(--accent2)"><span class="da">Bryst</span><span class="en" style="display:none">Chest</span></span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="8" y="46" width="20" height="10" rx="3" fill="#1a7ae8" opacity="0.3"/><circle cx="12" cy="26" r="6" fill="#1a7ae8"/><path d="M18 26 L52 40 M52 40 L52 52 M18 26 L18 38" stroke="#1a7ae8" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </div>
+      <h4>Decline Push-up</h4>
+      <p class="da">Fødder på forhøjning. Push-up som normalt. Øger belastning på øvre bryst og skulder.</p>
+      <p class="en" style="display:none">Feet elevated. Push-up as normal. Increases load on upper chest and shoulders.</p>
+    </div>
+
+    <!-- V-UP -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(76,175,80,0.15);color:var(--green)">Core</span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="7" fill="#4caf50"/><path d="M8 52 L32 25 L56 52 M8 52 L32 40 L56 52" stroke="#4caf50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h4>V-Up</h4>
+      <p class="da">Lig fladt. Løft ben og overkrop samtidigt til V-form. Rør ved tæerne. Sænk kontrolleret.</p>
+      <p class="en" style="display:none">Lie flat. Lift legs and upper body simultaneously to V-shape. Touch toes. Lower with control.</p>
+    </div>
+
+    <!-- JUMP ROPE -->
+    <div class="ex-card">
+      <span class="ex-cat" style="background:rgba(232,82,26,0.15);color:var(--accent)">Cardio</span>
+      <div class="ex-svg-wrap">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="10" r="6" fill="#e8521a"/><path d="M32 16 L32 32 M22 46 L32 32 L42 46 M16 28 L32 24 L48 28" stroke="#e8521a" stroke-width="2.5" stroke-linecap="round"/><path d="M10 20 Q20 14 32 20 Q44 14 54 20" stroke="#e8521a" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/></svg>
+      </div>
+      <h4>Jump Rope</h4>
+      <p class="da">Spring med begge ben. Hold albuer tæt. Bevæg håndleddene. Start 30 sek, byg op til 3 min.</p>
+      <p class="en" style="display:none">Jump with both feet. Keep elbows tucked. Move the wrists. Start 30 sec, build to 3 min.</p>
+    </div>
+
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- PRICING -->
+<div class="section" id="pricing">
+  <div class="section-header">
+    <h2><span class="da">TRÆNINGSKURSER & PRISER</span><span class="en" style="display:none">TRAINING PACKAGES & PRICING</span></h2>
+    <p class="da">Alle priser inkluderer 2 timers personlig træning om ugen, kostplan og opfølgning</p>
+    <p class="en" style="display:none">All prices include 2 hours personal training per week, nutrition plan and follow-up</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <h3><span class="da">4 UGER</span><span class="en" style="display:none">4 WEEKS</span></h3>
+      <div class="price-dk da">6.500 kr</div>
+      <div class="price-dk en" style="display:none">$940</div>
+      <div class="price-us da">≈ $940 USD</div>
+      <div class="price-us en" style="display:none">≈ 6.500 DKK</div>
+      <div class="price-period da">Engangsbetaling — kom i gang nu</div>
+      <div class="price-period en" style="display:none">One-time payment — start today</div>
+      <ul class="price-features">
+        <li class="da">8 × personlige træningssessioner</li><li class="en" style="display:none">8 personal training sessions</li>
+        <li class="da">Individuel kostplan</li><li class="en" style="display:none">Individual nutrition plan</li>
+        <li class="da">2 opfølgningsgespræk</li><li class="en" style="display:none">2 follow-up conversations</li>
+        <li class="da">Øvelsesvideo-bibliotek</li><li class="en" style="display:none">Exercise video library</li>
+        <li class="da">WhatsApp support</li><li class="en" style="display:none">WhatsApp support</li>
+        <li class="da">100% pengene-tilbage garanti</li><li class="en" style="display:none">100% money-back guarantee</li>
+      </ul>
+      <button class="btn-primary" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})"><span class="da">Vælg 4 uger</span><span class="en" style="display:none">Choose 4 weeks</span></button>
+      <div class="money-back-note da">💚 Ikke tilfreds? Fuld refusion inden for 30 dage — ingen spørgsmål</div>
+      <div class="money-back-note en" style="display:none">💚 Not satisfied? Full refund within 30 days — no questions asked</div>
+    </div>
+    <div class="price-card featured">
+      <div class="feat-badge da">MEST POPULÆR</div>
+      <div class="feat-badge en" style="display:none">MOST POPULAR</div>
+      <h3><span class="da">8 UGER</span><span class="en" style="display:none">8 WEEKS</span></h3>
+      <div class="price-dk da">11.500 kr</div>
+      <div class="price-dk en" style="display:none">$1,660</div>
+      <div class="price-us da">≈ $1.660 USD — spar 1.500 kr</div>
+      <div class="price-us en" style="display:none">≈ 11.500 DKK — save $220</div>
+      <div class="price-period da">Komplet transformation i 2 måneder</div>
+      <div class="price-period en" style="display:none">Complete transformation in 2 months</div>
+      <ul class="price-features">
+        <li class="da">Alt fra 4-ugers + dobbelt progression</li><li class="en" style="display:none">Everything from 4-week + double progression</li>
+        <li class="da">16 × personlige sessioner</li><li class="en" style="display:none">16 personal training sessions</li>
+        <li class="da">4 opfølgningsgespræk</li><li class="en" style="display:none">4 follow-up conversations</li>
+        <li class="da">Ugentlig check-in og justering</li><li class="en" style="display:none">Weekly check-in and adjustments</li>
+        <li class="da">Adgang til lukket gruppe</li><li class="en" style="display:none">Access to private group</li>
+        <li class="da">Ernæringsguide + opskrifter</li><li class="en" style="display:none">Nutrition guide + recipes</li>
+        <li class="da">100% pengene-tilbage garanti</li><li class="en" style="display:none">100% money-back guarantee</li>
+      </ul>
+      <button class="btn-primary" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})"><span class="da">Vælg 8 uger</span><span class="en" style="display:none">Choose 8 weeks</span></button>
+      <div class="money-back-note da">💚 Ikke tilfreds? Fuld refusion inden for 30 dage</div>
+      <div class="money-back-note en" style="display:none">💚 Not satisfied? Full refund within 30 days</div>
+    </div>
+    <div class="price-card">
+      <h3><span class="da">10 UGER</span><span class="en" style="display:none">10 WEEKS</span></h3>
+      <div class="price-dk da">14.000 kr</div>
+      <div class="price-dk en" style="display:none">$2,025</div>
+      <div class="price-us da">≈ $2.025 USD</div>
+      <div class="price-us en" style="display:none">≈ 14.000 DKK</div>
+      <div class="price-period da">Komplet livsstilsændring</div>
+      <div class="price-period en" style="display:none">Complete lifestyle transformation</div>
+      <ul class="price-features">
+        <li class="da">Alt fra 8-ugers program</li><li class="en" style="display:none">Everything from 8-week program</li>
+        <li class="da">20 × personlige sessioner</li><li class="en" style="display:none">20 personal training sessions</li>
+        <li class="da">6 opfølgningsgespræk</li><li class="en" style="display:none">6 follow-up conversations</li>
+        <li class="da">Kostdagbog med feedback</li><li class="en" style="display:none">Nutrition diary with feedback</li>
+        <li class="da">Livstidsadgang til materialer</li><li class="en" style="display:none">Lifetime access to materials</li>
+        <li class="da">100% pengene-tilbage garanti</li><li class="en" style="display:none">100% money-back guarantee</li>
+      </ul>
+      <button class="btn-primary" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})"><span class="da">Vælg 10 uger</span><span class="en" style="display:none">Choose 10 weeks</span></button>
+      <div class="money-back-note da">💚 Ikke tilfreds? Fuld refusion inden for 30 dage</div>
+      <div class="money-back-note en" style="display:none">💚 Not satisfied? Full refund within 30 days</div>
+    </div>
+    <div class="price-card">
+      <h3><span class="da">PERSONLIG TRÆNING</span><span class="en" style="display:none">PERSONAL TRAINING</span></h3>
+      <div class="price-dk" style="font-size:2rem"><span class="da">Kontakt</span><span class="en" style="display:none">Contact</span></div>
+      <div class="price-us da">1-til-1 coaching — individuelt tilbud</div>
+      <div class="price-us en" style="display:none">1-on-1 coaching — custom quote</div>
+      <div class="price-period da">Skræddersyet program og pris</div>
+      <div class="price-period en" style="display:none">Customized program and price</div>
+      <ul class="price-features">
+        <li class="da">100% individuelt program</li><li class="en" style="display:none">100% individual program</li>
+        <li class="da">Ugentlige 1-til-1 sessioner</li><li class="en" style="display:none">Weekly 1-on-1 sessions</li>
+        <li class="da">Daglig tilgængelighed</li><li class="en" style="display:none">Daily availability</li>
+        <li class="da">Løbende justeringer</li><li class="en" style="display:none">Ongoing adjustments</li>
+        <li class="da">Mindset og motivationscoaching</li><li class="en" style="display:none">Mindset and motivation coaching</li>
+        <li class="da">100% pengene-tilbage garanti</li><li class="en" style="display:none">100% money-back guarantee</li>
+      </ul>
+      <button class="btn-outline" onclick="document.getElementById('signup').scrollIntoView({behavior:'smooth'})"><span class="da">Kontakt mig</span><span class="en" style="display:none">Contact me</span></button>
+    </div>
+  </div>
+  <div class="guarantee">
+    <div class="guarantee-icon">🛡️</div>
+    <div>
+      <h3><span class="da">100% PENGENE-TILBAGE GARANTI</span><span class="en" style="display:none">100% MONEY-BACK GUARANTEE</span></h3>
+      <p class="da">Jeg er så overbevist om at dette program vil ændre dit liv, at jeg giver dig en ubetinget garanti. Fuldfør de 4 uger og er du ikke tilfreds med dit resultat — så får du hele beløbet tilbage. Ingen diskussion, ingen brok. Din succes er min prioritet.</p>
+      <p class="en" style="display:none">I'm so confident this program will change your life that I offer an unconditional guarantee. Complete the 4 weeks and if you're not satisfied with your results — you get every cent back. No arguments, no hassle. Your success is my priority.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- EAT CLEAN - MEMBERS ONLY -->
+<div class="section" id="eatclean">
+  <div class="section-header">
+    <h2><span class="da">🔒 EATING CLEAN — KUN MEDLEMMER</span><span class="en" style="display:none">🔒 EATING CLEAN — MEMBERS ONLY</span></h2>
+    <p class="da">Denne sektion er forbeholdt aktive medlemmer og abonnenter</p>
+    <p class="en" style="display:none">This section is reserved for active members and subscribers</p>
+  </div>
+  <div id="member-gate-section">
+    <div class="member-gate">
+      <div class="gate-icon">🔐</div>
+      <h2 class="gate-title da">Kun for medlemmer</h2>
+      <h2 class="gate-title en" style="display:none">Members only</h2>
+      <p class="gate-text da">Din personlige kostplan og Eating Clean programmet er eksklusivt for betalende medlemmer og abonnenter. Har du fået en adgangskode af din træner, kan du logge ind nedenfor.</p>
+      <p class="gate-text en" style="display:none">Your personal nutrition plan and Eating Clean program is exclusively for paying members and subscribers. If you've received an access code from your trainer, you can log in below.</p>
+      <div class="gate-form">
+        <input type="password" id="gate-pass" placeholder="Adgangskode / Access code">
+        <p class="gate-error" id="gate-error">Forkert adgangskode. Kontakt din træner.</p>
+        <button class="gate-btn" onclick="checkGate()">
+          <span class="da">Log ind</span><span class="en" style="display:none">Log in</span>
+        </button>
+      </div>
+      <p style="margin-top:1.5rem;font-size:12px;color:var(--muted)" class="da">Ikke medlem endnu? <a href="#signup" style="color:var(--accent);text-decoration:none">Tilmeld dig her →</a></p>
+      <p style="margin-top:1.5rem;font-size:12px;color:var(--muted)" class="en" style="display:none">Not a member yet? <a href="#signup" style="color:var(--accent);text-decoration:none">Sign up here →</a></p>
+    </div>
+  </div>
+  <div class="member-content" id="member-content-section">
+    <div style="padding:1rem 1.25rem;background:#0d160a;border:1px solid #2a5a20;border-radius:6px;margin-bottom:2rem;color:#6abf5e;font-size:13px">
+      ✅ <strong class="da">Velkommen, medlem!</strong><strong class="en" style="display:none">Welcome, member!</strong>
+      <span class="da"> Du har adgang til dit personlige Eating Clean program.</span><span class="en" style="display:none"> You have access to your personal Eating Clean program.</span>
+    </div>
+    <div class="eat-grid">
+      <div class="eat-card">
+        <h4><span class="da">HVERDAGS-EKSEMPEL (Uge 1–2)</span><span class="en" style="display:none">WEEKDAY EXAMPLE (Week 1–2)</span></h4>
+        <div class="meal-row"><div class="meal-time">07:00</div><div class="da">Havregrød 80g + bær + mandler + 3 scrambled æg + grøn te</div><div class="en" style="display:none">Oatmeal 80g + berries + almonds + 3 scrambled eggs + green tea</div></div>
+        <div class="meal-row"><div class="meal-time">10:00</div><div class="da">Græsk yoghurt 150g + 1 banan + håndfuld valnødder</div><div class="en" style="display:none">Greek yogurt 150g + 1 banana + handful of walnuts</div></div>
+        <div class="meal-row"><div class="meal-time">13:00</div><div class="da">Kyllingebryst 200g + quinoa 100g + blandede grøntsager + avocado + olivenolie</div><div class="en" style="display:none">Chicken breast 200g + quinoa 100g + mixed vegetables + avocado + olive oil</div></div>
+        <div class="meal-row"><div class="meal-time">16:00</div><div class="da">Riskagebrud + peanutbutter + æble eller banan (pre-workout)</div><div class="en" style="display:none">Rice cake + peanut butter + apple or banana (pre-workout)</div></div>
+        <div class="meal-row"><div class="meal-time">19:00</div><div class="da">Laks 180g (ovnbagt) + søde kartofler + dampede grøntsager + citron</div><div class="en" style="display:none">Salmon 180g (oven-baked) + sweet potatoes + steamed vegetables + lemon</div></div>
+      </div>
+      <div class="eat-card">
+        <h4><span class="da">HVERDAGS-EKSEMPEL (Uge 3–4)</span><span class="en" style="display:none">WEEKDAY EXAMPLE (Week 3–4)</span></h4>
+        <div class="meal-row"><div class="meal-time">07:00</div><div class="da">Proteinpandekager (2 æg + 40g havre + banan) + blåbær</div><div class="en" style="display:none">Protein pancakes (2 eggs + 40g oats + banana) + blueberries</div></div>
+        <div class="meal-row"><div class="meal-time">10:00</div><div class="da">Hytteost 150g + agurk + rå gulerødder + paranødder</div><div class="en" style="display:none">Cottage cheese 150g + cucumber + raw carrots + Brazil nuts</div></div>
+        <div class="meal-row"><div class="meal-time">13:00</div><div class="da">Tunbøf 180g + brune ris 100g + spinat + tomater + pesto</div><div class="en" style="display:none">Tuna steak 180g + brown rice 100g + spinach + tomatoes + pesto</div></div>
+        <div class="meal-row"><div class="meal-time">16:00</div><div class="da">Proteinshake 30g + mandelmælk + blåbær (post-workout)</div><div class="en" style="display:none">Protein shake 30g + almond milk + blueberries (post-workout)</div></div>
+        <div class="meal-row"><div class="meal-time">19:00</div><div class="da">Kalkun 200g + grønnkål + linser + citron + ingefær</div><div class="en" style="display:none">Turkey 200g + kale + lentils + lemon + ginger</div></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:1rem">
+      <div class="eat-card">
+        <h4 style="color:var(--green)" class="da">SPIS MERE AF</h4>
+        <h4 style="color:var(--green)" class="en" style="display:none">EAT MORE OF</h4>
+        <div class="food-list" style="display:block">
+          <div style="font-size:13px;color:#ccc;line-height:2.1">✅ <span class="da">Kylling, kalkun, fisk, rejer</span><span class="en" style="display:none">Chicken, turkey, fish, shrimp</span><br>✅ <span class="da">Æg og æggehvider</span><span class="en" style="display:none">Eggs and egg whites</span><br>✅ <span class="da">Alle grøntsager</span><span class="en" style="display:none">All vegetables</span><br>✅ <span class="da">Bær, citrusfrugter</span><span class="en" style="display:none">Berries, citrus fruits</span><br>✅ <span class="da">Havre, quinoa, brune ris</span><span class="en" style="display:none">Oats, quinoa, brown rice</span><br>✅ <span class="da">Mandler, valnødder, paranødder</span><span class="en" style="display:none">Almonds, walnuts, Brazil nuts</span><br>✅ <span class="da">Olivenolie, avocado</span><span class="en" style="display:none">Olive oil, avocado</span><br>✅ <span class="da">Bælgfrugter og linser</span><span class="en" style="display:none">Legumes and lentils</span><br>✅ <span class="da">Søde kartofler</span><span class="en" style="display:none">Sweet potatoes</span></div>
+        </div>
+      </div>
+      <div class="eat-card">
+        <h4 style="color:#e84040" class="da">UNDGÅ</h4>
+        <h4 style="color:#e84040" class="en" style="display:none">AVOID</h4>
+        <div style="font-size:13px;color:#ccc;line-height:2.1">❌ <span class="da">Sukker og slik</span><span class="en" style="display:none">Sugar and candy</span><br>❌ <span class="da">Hvidt brød og hvidt mel</span><span class="en" style="display:none">White bread and white flour</span><br>❌ <span class="da">Sodavand og juice</span><span class="en" style="display:none">Soda and juice</span><br>❌ <span class="da">Fastfood og friture</span><span class="en" style="display:none">Fast food and fried foods</span><br>❌ <span class="da">Alkohol (4 uger)</span><span class="en" style="display:none">Alcohol (4 weeks)</span><br>❌ <span class="da">Færdigretter</span><span class="en" style="display:none">Ready-made meals</span><br>❌ <span class="da">Chips og snacks</span><span class="en" style="display:none">Chips and snacks</span><br>❌ <span class="da">Margarine</span><span class="en" style="display:none">Margarine</span><br>❌ <span class="da">Forarbejdet kød (pølser)</span><span class="en" style="display:none">Processed meat (sausages)</span></div>
+      </div>
+      <div class="eat-card">
+        <h4 style="color:var(--accent2)" class="da">UGENTLIGE REGLER</h4>
+        <h4 style="color:var(--accent2)" class="en" style="display:none">WEEKLY RULES</h4>
+        <div style="font-size:13px;color:#ccc;line-height:2.1">📅 <span class="da">Meal prep søndag aften</span><span class="en" style="display:none">Meal prep Sunday evening</span><br>💧 <span class="da">2–3 liter vand dagligt</span><span class="en" style="display:none">2–3 liters water daily</span><br>🌙 <span class="da">Stop mad 2 timer før søvn</span><span class="en" style="display:none">No food 2 hours before sleep</span><br>⏱ <span class="da">Spis hver 2,5–3 time</span><span class="en" style="display:none">Eat every 2.5–3 hours</span><br>🥩 <span class="da">1,6–2g protein pr. kg</span><span class="en" style="display:none">1.6–2g protein per kg</span><br>🍃 <span class="da">Min. 5 grønt pr. dag</span><span class="en" style="display:none">Min. 5 vegetables per day</span><br>😊 <span class="da">1 cheat meal pr. uge OK</span><span class="en" style="display:none">1 cheat meal per week OK</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- SIGNUP -->
+<div class="section" id="signup">
+  <div class="section-header">
+    <h2><span class="da">TILMELD DIG</span><span class="en" style="display:none">SIGN UP</span></h2>
+    <p class="da">Udfyld formularen — vi kontakter dig inden for 24 timer for en gratis konsultation</p>
+    <p class="en" style="display:none">Fill in the form — we'll contact you within 24 hours for a free consultation</p>
+  </div>
+  <div class="form-wrap">
+    <div class="form-grid" id="signupForm">
+      <div class="form-group">
+        <label class="da">Fulde navn *</label><label class="en" style="display:none">Full name *</label>
+        <input type="text" id="fname" placeholder="Dit fulde navn / Your full name">
+      </div>
+      <div class="form-group">
+        <label class="da">Køn</label><label class="en" style="display:none">Gender</label>
+        <select id="gender">
+          <option value="" class="da">Vælg køn / Select gender</option>
+          <option class="da">Mand / Male</option>
+          <option class="da">Kvinde / Female</option>
+          <option class="da">Andet / Other</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label class="da">Adresse</label><label class="en" style="display:none">Address</label>
+        <input type="text" id="address" placeholder="Vej og nr., postnummer og by / Street, zip code and city">
+      </div>
+      <div class="form-group">
+        <label class="da">Mobilnummer *</label><label class="en" style="display:none">Mobile number *</label>
+        <input type="tel" id="phone" id="phone" placeholder="+45 / +1 (___) ___-____">
+      </div>
+      <div class="form-group">
+        <label>E-mail *</label>
+        <input type="email" id="email" placeholder="din@email.dk / your@email.com">
+      </div>
+      <div class="form-group full">
+        <label class="da">Vælg program *</label><label class="en" style="display:none">Choose program *</label>
+        <select id="program">
+          <option value="">-- <span class="da">Vælg forløb</span> / Choose program --</option>
+          <option>4 uger / 4 weeks — Tab fedt / Lose fat (6.500 kr / $940)</option>
+          <option>4 uger / 4 weeks — Byg muskler / Build muscle (6.500 kr / $940)</option>
+          <option>4 uger / 4 weeks — Vedligehold / Maintain (6.500 kr / $940)</option>
+          <option>4 uger / 4 weeks — Hjemmetræning / Home training (6.500 kr / $940)</option>
+          <option>8 uger / 8 weeks (11.500 kr / $1.660)</option>
+          <option>10 uger / 10 weeks (14.000 kr / $2.025)</option>
+          <option>Personlig træning / Personal training — Kontakt / Contact</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label class="da">Hvor meget er du villig til at træne om ugen?</label>
+        <label class="en" style="display:none">How much are you willing to train per week?</label>
+        <div class="radio-group">
+          <label class="radio-btn"><input type="radio" name="hours" value="1-2"><span>1–2 <span class="da">timer</span><span class="en" style="display:none">hours</span>/uge</span></label>
+          <label class="radio-btn"><input type="radio" name="hours" value="2-3"><span>2–3 <span class="da">timer</span><span class="en" style="display:none">hours</span>/uge</span></label>
+          <label class="radio-btn"><input type="radio" name="hours" value="3-4"><span>3–4 <span class="da">timer</span><span class="en" style="display:none">hours</span>/uge</span></label>
+          <label class="radio-btn"><input type="radio" name="hours" value="4+"><span>4+ <span class="da">timer</span><span class="en" style="display:none">hours</span>/uge</span></label>
+        </div>
+      </div>
+      <div class="form-group full">
+        <label class="da">Dit mål og ønsker</label><label class="en" style="display:none">Your goal and wishes</label>
+        <textarea id="goal" placeholder="Fortæl hvad du gerne vil opnå... / Tell us what you want to achieve..."></textarea>
+      </div>
+      <div class="form-group full">
+        <button class="submit-btn" onclick="submitForm()">
+          <span class="da">SEND TILMELDING — FÅ EN GRATIS KONSULTATION →</span>
+          <span class="en" style="display:none">SEND SIGN-UP — GET A FREE CONSULTATION →</span>
+        </button>
+      </div>
+    </div>
+    <div class="success-msg" id="successMsg">
+      <div style="font-size:3rem;margin-bottom:1rem">🎉</div>
+      <strong style="font-size:1.3rem;font-family:'Bebas Neue',sans-serif;letter-spacing:0.05em" class="da">TILLYKKE — DU ER TILMELDT!</strong>
+      <strong style="font-size:1.3rem;font-family:'Bebas Neue',sans-serif;letter-spacing:0.05em" class="en" style="display:none">CONGRATULATIONS — YOU'RE SIGNED UP!</strong>
+      <p style="color:#aaa;font-size:14px;margin-top:0.75rem" class="da">Vi kontakter dig inden for 24 timer på det oplyste nummer. Vi glæder os til at komme i gang med din transformation!</p>
+      <p style="color:#aaa;font-size:14px;margin-top:0.75rem" class="en" style="display:none">We'll contact you within 24 hours at the number provided. We look forward to starting your transformation!</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">FitForce</div>
+  <p class="da">Danmarks mest resultatskabende personlige træningsprogram — 20+ års erfaring</p>
+  <p class="en" style="display:none">America's most result-driven personal training program — 20+ years experience</p>
+  <div class="f-links">
+    <a href="#programs" class="da">Programmer</a><a href="#programs" class="en" style="display:none">Programs</a>
+    <a href="#exercises" class="da">Øvelser</a><a href="#exercises" class="en" style="display:none">Exercises</a>
+    <a href="#pricing" class="da">Priser</a><a href="#pricing" class="en" style="display:none">Pricing</a>
+    <a href="#eatclean" class="da">Medlemslogin</a><a href="#eatclean" class="en" style="display:none">Member login</a>
+    <a href="#signup" class="da">Tilmeld</a><a href="#signup" class="en" style="display:none">Sign up</a>
+  </div>
+  <p style="margin-top:1rem;font-size:11px;color:#444" class="da">© 2026 FitForce. Alle rettigheder forbeholdes. 100% pengene-tilbage garanti på alle forløb.</p>
+  <p style="margin-top:1rem;font-size:11px;color:#444" class="en" style="display:none">© 2026 FitForce. All rights reserved. 100% money-back guarantee on all programs.</p>
+</footer>
+
+<script>
+  function showPTab(id,el){
+    document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.ptab-content').forEach(c=>c.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
+  }
+
+  function setLang(lang){
+    document.querySelectorAll('.da').forEach(el=>{el.style.display=lang==='da'?'':'none'});
+    document.querySelectorAll('.en').forEach(el=>{el.style.display=lang==='en'?'':'none'});
+    document.getElementById('btn-da').classList.toggle('active',lang==='da');
+    document.getElementById('btn-en').classList.toggle('active',lang==='en');
+    document.documentElement.lang=lang==='da'?'da':'en';
+  }
+
+  function checkGate(){
+    const pass=document.getElementById('gate-pass').value;
+    const codes=['fitforce2026','member2026','Fitforce2026','FitForce2026'];
+    if(codes.includes(pass)){
+      document.getElementById('member-gate-section').style.display='none';
+      document.getElementById('member-content-section').style.display='block';
+    } else {
+      const errEl=document.getElementById('gate-error');
+      errEl.style.display='block';
+      errEl.textContent=document.documentElement.lang==='en'
+        ?'Wrong code. Contact your trainer.'
+        :'Forkert adgangskode. Kontakt din træner.';
+    }
+  }
+
+  document.getElementById('gate-pass').addEventListener('keydown',function(e){
+    if(e.key==='Enter')checkGate();
+  });
+
+  function submitForm(){
+    const name=document.getElementById('fname').value.trim();
+    const phone=document.getElementById('phone').value.trim();
+    const email=document.getElementById('email').value.trim();
+    const lang=document.documentElement.lang;
+    if(!name||!phone||!email){
+      alert(lang==='en'?'Please fill in name, phone and email.':'Udfyld venligst navn, telefon og e-mail.');
+      return;
+    }
+    document.getElementById('signupForm').style.display='none';
+    document.getElementById('successMsg').style.display='block';
+  }
+</script>
+</body>
+</html>
